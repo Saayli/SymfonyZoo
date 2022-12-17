@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue au Zoo !{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Bienvenue sur le site de gestion du Zoo !</h1>
+        <table class="table table-striped">
+            <tr>
+                <th>Nom</th>
+                <th>Superficie</th>
+                <th>Date d'ouverture</th>
+                <th>Date de fermeture</th>
+                <th></th>
+            </tr>
+            {% for e in espaces %}
+                <tr>
+                    <td>{{ e.Nom }}</td>
+                    <td>{{ e.Superficie}}</td>
+                    <td>{% if e.DateOuverture != null %}
+                            {{ e.DateOuverture.format('d/m/Y') }}
+                        {% else %}
+                            Indéfini
+                        {% endif %}</td>
+                    <td>{% if e.DateFermeture != null %}
+                            {{ e.DateFermeture.format('d/m/Y') }}
+                        {% else %}
+                            Indéfini
+                        {% endif %}</td>
+                    <td><a href="{{ path("espace_modifier", {"id":e.id}) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path("espace_supprimer", {"id":e.id}) }}" class="btn btn-danger">Supprimer</a>
+                        <a href="{{ path("enclos_afficher", {"id":e.id}) }}" class="btn btn-warning">Enclos</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <h2>Ajouter un espace</h2>
+        {{ form(formulaire) }}
+    </div>
+
+{% endblock %}
