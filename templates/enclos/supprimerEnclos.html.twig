@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer l'enclos{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Etes-vous sûr de vouloir supprimer l'enclos ?<i>{{ enclos.Nom }}</i></h1>
+        {{ form(formulaire) }}
+        <a href="{{ path("enclos_afficher", {"id":espace}) }}" class="btn btn-warning">Annuler</a>
+    </div>
+
+{% endblock %}

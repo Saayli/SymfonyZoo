@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des animaux{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Gestion des animaux</h1>
+        <h2>Animaux de l'enclos {{ enclos.Nom }}</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Date d'arrivée</th>
+                <th>Date de départ</th>
+                <th>Genre</th>
+                <th>Espèce</th>
+                <th>Propriétaire</th>
+                <th>Stérélisé</th>
+                <th>Quarantaine</th>
+                <th></th>
+            </tr>
+            {% for a in animal %}
+                <tr>
+                    <td>{{ a.NumId }}</td>
+                    <td>{{ a.Nom }}</td>
+                    <td>{% if  a.DateArrivee  != null %}
+                            {{ a.DateArrivee.format('d/m/Y') }}
+                        {% else %}
+                            Indéfini
+                        {% endif %}</td></td>
+                    <td>{% if a.DateDepart != null %}
+                            {{ a.DateDepart.format('d/m/Y') }}
+                        {% else %}
+                            Indéfini
+                        {% endif %}</td>
+                    <td>{{ a.Genre }}</td>
+                    <td>{{ a.Espece }}</td>
+                    <td>{% if a.Proprietaire == 1 %}
+                            Propriétaire
+                        {% endif %}
+                        {% if a.Proprietaire == 0 %}
+                            Non Proprétaire
+                        {% endif %}</td>
+                    <td>{% if a.Sterelise == 1 %}
+                            Stérelisé
+                        {% endif %}
+                        {% if a.Sterelise == 0 %}
+                            Non Stérelisé
+                        {% endif %}</td>
+                    <td>{% if a.Quarantaine == 1 %}
+                            En Quarantaine
+                        {% endif %}
+                        {% if a.Quarantaine == 0 %}
+                            Sain
+                        {% endif %}</td>
+                    <td><a href="{{ path("modifier_animal", {"id":a.id}) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ path("animal_supprimer", {"id":a.id}) }}" class="btn btn-danger">Supprimer</a>
+                </tr>
+            {% endfor %}
+        </table>
+            <a href="{{ path('animal_ajouter') }}" class="btn btn-primary">Ajouter un animal</a>
+    </div>
+
+{% endblock %}

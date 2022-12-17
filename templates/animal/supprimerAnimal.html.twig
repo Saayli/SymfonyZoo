@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Supprimer l'animal{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Etes-vous sûr de vouloir supprimer l'animal ?<i>{{ animal.Nom }}</i></h1>
+        {{ form(formulaire) }}
+        <a href="{{ path("animal_afficher", {"id":enclos}) }}" class="btn btn-warning">Annuler</a>
+    </div>
+
+{% endblock %}
